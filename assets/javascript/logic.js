@@ -58,3 +58,6 @@ $(document).ready(function() {
     
 
 })
+
+// dropdown jquery
+$(".dropdown-trigger").dropdown();
