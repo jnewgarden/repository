@@ -6,15 +6,17 @@ var userLocation = "&location=";
 var urlMethod = "";
 var queryUrl = "http://api.petfinder.com/";
 var zipCode = "";
+
 //Prevent reload on enterKey down
 $("#zip_code").on("keydown", function(event) {
-  event.preventDefault();
+   if (event.keyCode === 13) {
+   	event.preventDefault();
+  }
 });
 
 //Handle zip content
 $("#zip_code").on("keyup", function(event) {
 	
-  event.preventDefault();
   if (event.keyCode === 13) {
 
    
@@ -23,7 +25,6 @@ $("#zip_code").on("keyup", function(event) {
    	$(this).val("");
    	console.log(zipCode);
    	genericApiCall();
-   //$(".green").click();
   }
 });
 
