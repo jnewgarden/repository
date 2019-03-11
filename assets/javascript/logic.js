@@ -6,15 +6,19 @@ var zipCode = "";
 
 //Prevent reload on enterKey down
 $("#zip_code").on("keydown", function(event) {
-   if (event.keyCode === 13) {
-   	event.preventDefault();
-  }
+	if($(this).val().length >= 5 && event.keyCode !== 8) event.preventDefault();
+    if (event.keyCode === 13) event.preventDefault();
+  
 });
 
 //Handle zip content
 $("#zip_code").on("keyup", function(event) {
-  if (event.keyCode === 13) {
-   	zipCode = $(this).val();
+	
+  if (event.keyCode === 13 && $(this).val().length === 5) {
+
+   
+	zipCode = $(this).val();
+	console.log(zipCode.length)
    	urlMethod = "shelter.find";
    	$(this).val("");
    	console.log(zipCode);
