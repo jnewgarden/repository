@@ -1,6 +1,3 @@
-
-
-
 var apiKey = "?key=037763ba7e9f1eff9866353a9dfd89a2";
 var userLocation = "&location=";
 var urlMethod = "";
@@ -16,10 +13,7 @@ $("#zip_code").on("keydown", function(event) {
 
 //Handle zip content
 $("#zip_code").on("keyup", function(event) {
-	
   if (event.keyCode === 13) {
-
-   
    	zipCode = $(this).val();
    	urlMethod = "shelter.find";
    	$(this).val("");
@@ -29,8 +23,6 @@ $("#zip_code").on("keyup", function(event) {
 });
 
 function genericApiCall(){
-
-
 
 	switch (urlMethod){
 
@@ -53,9 +45,23 @@ function genericApiCall(){
 					var _phone = response.petfinder.shelters.shelter[i].phone.$t;
 					var _email = response.petfinder.shelters.shelter[i].email.$t;
 					var _name = response.petfinder.shelters.shelter[i].name.$t;
+					var _city = response.petfinder.shelters.shelter[i].city.$t;
+					var _state = response.petfinder.shelters.shelter[i].state.$t;
+					var _zip = response.petfinder.shelters.shelter[i].zip.$t;
+
+					$("#shelterResults").append(
+						"<div class=cell id='cell" + i + "'>" +
+						"Name: " + _name + "<br>" +
+						"Phone number: " + _phone + "<br>" +
+						"Email: " + _email + "<br>" + 
+						"Location: " + _city + ", " + _state + " " + _zip + "<hr>"
+					);
+					console.log(_name);
 					console.log(_phone);
 					console.log(_email);
-					console.log(_name);
+					console.log(_city);
+					console.log(_state);
+					console.log(_zip);
 				});
 				
 				});
