@@ -15,6 +15,12 @@
 
 
 
-/* ID's */
 
+/* ID's */
+#fixIt {
+    align-content: center;
+    margin: auto;
+    float: unset;
+    float: none;
+}
 
