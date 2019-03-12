@@ -77,13 +77,15 @@ function genericApiCall(){
 						"<div class='row rowCell' style='margin-bottom: 0;' id='cell" + i + "'>" +
 							"<ul class='collapsible style' style='margin: 0;'>" +
 								"<li id='li" + i + "'" + tempClass + ">" +
-									"<div class='collapsible-header' onClick='onlyOneOpen(this)'>"+_name+"</div>"+
+									"<div class='collapsible-header' style='background-color: lightgrey' onClick='onlyOneOpen(this)'>"+_name+"</div>"+
 									"<div class='collapsible-body'><span>"+
-										"Name: " + _name + "<br>" +
-										"Phone number: " + _phone + "<br>" +
-										"Email: " + _email + "<br>" + 
-										"Location: " + _city + ", " + _state + " " + _zip + "<br>"+
-										"<a class='right'> Click for more <a>" +
+										"<b>Name: </b>" + _name + "<br>" +
+										"<b>Phone number: </b>" + _phone + "<br>" +
+										"<b>Email: </b>" + _email + "<br>" + 
+										"<b>Location: </b>" + _city + ", " + _state + " " + _zip + "<br>"+
+										"<div class='button' id='btn-more' style='padding-bottom: 26px'>" +
+										"<button id='more-btn' class='right btn waves-effect waves-light'> Click for more </button>" +
+										"</div>" +
 										"</span></div>" +
 								"</li>" +
 							"</ul>" +
