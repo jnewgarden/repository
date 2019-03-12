@@ -15,14 +15,12 @@ $("#zip_code").on("keydown", function(event) {
 $("#zip_code").on("keyup", function(event) {
 	
   if (event.keyCode === 13 && $(this).val().length === 5) {
-
-   
-	zipCode = $(this).val();
-	console.log(zipCode.length)
-   	urlMethod = "shelter.find";
-   	$(this).val("");
-   	console.log(zipCode);
-   	genericApiCall();
+		zipCode = $(this).val();
+		console.log(zipCode.length)
+		urlMethod = "shelter.find";
+		$(this).val("");
+		console.log(zipCode);
+		genericApiCall();
   }
 });
 
@@ -55,7 +53,7 @@ function genericApiCall(){
 					var tempId = "";
 					if(i===0) tempId = "class='active'";
 					$("#shelterResults").append(
-						"<div class='row' id='cell" + i + "'><div class='col s11'>" +
+						"<div class='row' id='cell" + i + "'>" +
 							"<ul class='collapsible'>" +
 								"<li " + tempId + ">" +
 									"<div class='collapsible-header'>"+_name+"</div>"+
@@ -63,11 +61,12 @@ function genericApiCall(){
 										"Name: " + _name + "<br>" +
 										"Phone number: " + _phone + "<br>" +
 										"Email: " + _email + "<br>" + 
-										"Location: " + _city + ", " + _state + " " + _zip +
-									"</span></div>" +
+										"Location: " + _city + ", " + _state + " " + _zip + "<br>"+
+										"<a class='right'> Click for more <a>" +
+										"</span></div>" +
 								"</li>" +
 							"</ul>" +
-						"</div><div class = 'col s1'>" + '<i class="fa fa-angle-double-right" id="arrow-btn"></i>' + "</div></div>"
+						"</div>"
 					);
 					$('.collapsible').collapsible();
 					console.log(_name);
@@ -87,18 +86,10 @@ function genericApiCall(){
 			console.log("Invalid url request");
 
 	}
-		
-	
-
-	
-
-	console.log();
 }
 
 // document ready function
-
 $(document).ready(function(){
-	
 });
 
 // dropdown jquery
