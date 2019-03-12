@@ -77,14 +77,14 @@ function genericApiCall(){
 						"<div class='row rowCell' style='margin-bottom: 0;' id='cell" + i + "'>" +
 							"<ul class='collapsible style' style='margin: 0;'>" +
 								"<li id='li" + i + "'" + tempClass + ">" +
-									"<div class='collapsible-header' style='background-color: lightgrey' onClick='onlyOneOpen(this)'>"+_name+"</div>"+
+									"<div class='collapsible-header' style='background-color: #009900; color: white;' onClick='onlyOneOpen(this)'>"+_name+"</div>"+
 									"<div class='collapsible-body'><span>"+
 										"<b>Name: </b>" + _name + "<br>" +
 										"<b>Phone number: </b>" + _phone + "<br>" +
 										"<b>Email: </b>" + _email + "<br>" + 
 										"<b>Location: </b>" + _city + ", " + _state + " " + _zip + "<br>"+
 										"<div class='button' id='btn-more' style='padding-bottom: 26px'>" +
-										"<button id='more-btn' class='right btn waves-effect waves-light'> Click for more </button>" +
+										"<button id='more-btn' class='right btn waves-effect waves-light' style='background-color: #009900'> Click for more </button>" +
 										"</div>" +
 										"</span></div>" +
 								"</li>" +
@@ -129,6 +129,7 @@ function onlyOneOpen(e){
 
 // document ready function
 $(document).ready(function(){
+	$("#btn-search").css("background-color","#009900");
 });
 
 // dropdown jquery
