@@ -23,4 +23,14 @@
     float: unset;
     float: none;
 }
+#zip_code, placeholder {
+    text-align: center;
+    font-size: 35px;
+    border-bottom-color: #009900;
+    border-bottom-style: solid;
+}
 
+#search-btn{
+    margin: auto;
+    width: 40%;
+}
