@@ -3,7 +3,7 @@ var userLocation = "&location=";
 var urlMethod = "";
 var queryUrl = "http://api.petfinder.com/";
 var zipCode = "";
-
+var currentActive = "li0";
 //Prevent reload on enterKey down
 $("#zip_code").on("keydown", function(event) {
 	if($(this).val().length >= 5 && event.keyCode !== 8) event.preventDefault();
@@ -13,15 +13,24 @@ $("#zip_code").on("keydown", function(event) {
 
 //Handle zip content
 $("#zip_code").on("keyup", function(event) {
-	
-  if (event.keyCode === 13 && $(this).val().length === 5) {
-		zipCode = $(this).val();
-		console.log(zipCode.length)
+	var tempZip = $(this).val();
+  if (event.keyCode === 13 && tempZip.length === 5) {
 		urlMethod = "shelter.find";
+		zipCode = tempZip;
 		$(this).val("");
-		console.log(zipCode);
 		genericApiCall();
   }
+});
+
+$("#btn-search").on("click", function(event) {
+	var tempZip = $("#zip_code").val();
+	if(tempZip.length===5){
+		urlMethod = "shelter.find";
+		zipCode = tempZip;
+		$("#zip_code").val("");
+		genericApiCall();
+	}
+	
 });
 
 function genericApiCall(){
@@ -43,20 +52,32 @@ function genericApiCall(){
 				}
 			}
 			$.ajax(settings).done(function (response) {
+				if(response.petfinder.shelters === undefined){
+					$("#shelterResults").text("No shelters found for zip code: " + zipCode);
+					return;
+				}
+				$("#shelterResults").html("");
+				currentActive = "li0";
 				$.each(response.petfinder.shelters.shelter, function(i){
 					var _phone = response.petfinder.shelters.shelter[i].phone.$t;
+					if(_phone===undefined) _phone = "N/A";
 					var _email = response.petfinder.shelters.shelter[i].email.$t;
+					if(_email===undefined) _phone = "N/A";
 					var _name = response.petfinder.shelters.shelter[i].name.$t;
+					if(_name===undefined) _phone = "N/A";
 					var _city = response.petfinder.shelters.shelter[i].city.$t;
+					if(_city===undefined) _phone = "N/A";
 					var _state = response.petfinder.shelters.shelter[i].state.$t;
+					if(_state===undefined) _phone = "N/A";
 					var _zip = response.petfinder.shelters.shelter[i].zip.$t;
-					var tempId = "";
-					if(i===0) tempId = "class='active'";
+					if(_zip===undefined) _phone = "N/A";
+					var tempClass = "";
+					if(i===0) tempClass = "class='active'";
 					$("#shelterResults").append(
-						"<div class='row' id='cell" + i + "'>" +
-							"<ul class='collapsible'>" +
-								"<li " + tempId + ">" +
-									"<div class='collapsible-header'>"+_name+"</div>"+
+						"<div class='row rowCell' style='margin-bottom: 0;' id='cell" + i + "'>" +
+							"<ul class='collapsible style' style='margin: 0;'>" +
+								"<li id='li" + i + "'" + tempClass + ">" +
+									"<div class='collapsible-header' onClick='onlyOneOpen(this)'>"+_name+"</div>"+
 									"<div class='collapsible-body'><span>"+
 										"Name: " + _name + "<br>" +
 										"Phone number: " + _phone + "<br>" +
@@ -77,7 +98,9 @@ function genericApiCall(){
 					console.log(_zip);
 				});
 				
-				});
+				}).fail( function(xhr, textStatus, errorThrown) {
+					console.log("Something bad happened");
+			});
 			
 			break;
 		case 'shelter.get':
@@ -87,6 +110,20 @@ function genericApiCall(){
 
 	}
 }
+
+function onlyOneOpen(e){
+	var tempId = $(e).parent().attr("id");
+	var tempClass = $(e).parent().attr("class");
+	if(tempId != currentActive && currentActive !== "" && tempClass !== "active"){
+		if($("#" + currentActive).attr("class")==="active")
+			$("#" + currentActive).children().click();
+		currentActive = tempId;
+		return;
+	}
+
+	
+
+};
 
 // document ready function
 $(document).ready(function(){
