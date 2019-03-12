@@ -52,11 +52,12 @@ function genericApiCall(){
 					var _city = response.petfinder.shelters.shelter[i].city.$t;
 					var _state = response.petfinder.shelters.shelter[i].state.$t;
 					var _zip = response.petfinder.shelters.shelter[i].zip.$t;
-
+					var tempId = "";
+					if(i===0) tempId = "class='active'";
 					$("#shelterResults").append(
 						"<div class='row' id='cell" + i + "'><div class='col s11'>" +
 							"<ul class='collapsible'>" +
-								"<li>" +
+								"<li " + tempId + ">" +
 									"<div class='collapsible-header'>"+_name+"</div>"+
 									"<div class='collapsible-body'><span>"+
 										"Name: " + _name + "<br>" +
