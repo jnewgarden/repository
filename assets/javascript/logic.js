@@ -55,12 +55,20 @@ function genericApiCall(){
 
 					$("#shelterResults").append(
 						"<div class='row' id='cell" + i + "'><div class='col s11'>" +
-						"Name: " + _name + "<br>" +
-						"Phone number: " + _phone + "<br>" +
-						"Email: " + _email + "<br>" + 
-						"Location: " + _city + ", " + _state + " " + _zip + "<hr></div>" +
-						"<div class = 'col s1'>" + '<i class="fa fa-angle-double-right" id="arrow-btn"></i>' + "</div></div>"
+							"<ul class='collapsible'>" +
+								"<li>" +
+									"<div class='collapsible-header'>"+_name+"</div>"+
+									"<div class='collapsible-body'><span>"+
+										"Name: " + _name + "<br>" +
+										"Phone number: " + _phone + "<br>" +
+										"Email: " + _email + "<br>" + 
+										"Location: " + _city + ", " + _state + " " + _zip +
+									"</span></div>" +
+								"</li>" +
+							"</ul>" +
+						"</div><div class = 'col s1'>" + '<i class="fa fa-angle-double-right" id="arrow-btn"></i>' + "</div></div>"
 					);
+					$('.collapsible').collapsible();
 					console.log(_name);
 					console.log(_phone);
 					console.log(_email);
@@ -87,12 +95,10 @@ function genericApiCall(){
 }
 
 // document ready function
-$(document).ready(function() {
 
-
-    
-
-})
+$(document).ready(function(){
+	
+});
 
 // dropdown jquery
 $(".dropdown-trigger").dropdown();
