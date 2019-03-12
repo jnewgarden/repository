@@ -54,11 +54,12 @@ function genericApiCall(){
 					var _zip = response.petfinder.shelters.shelter[i].zip.$t;
 
 					$("#shelterResults").append(
-						"<div class=cell id='cell" + i + "'>" +
+						"<div class='row' id='cell" + i + "'><div class='col s11'>" +
 						"Name: " + _name + "<br>" +
 						"Phone number: " + _phone + "<br>" +
 						"Email: " + _email + "<br>" + 
-						"Location: " + _city + ", " + _state + " " + _zip + "<hr>"
+						"Location: " + _city + ", " + _state + " " + _zip + "<hr></div>" +
+						"<div class = 'col s1'>" + '<i class="fa fa-angle-double-right" id="arrow-btn"></i>' + "</div></div>"
 					);
 					console.log(_name);
 					console.log(_phone);
