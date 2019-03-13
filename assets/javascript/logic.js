@@ -172,9 +172,9 @@ function genericApiCall(){
 					if(_zip===undefined) _phone = "N/A";
 					var _id = response.petfinder.shelters.shelter[i].id.$t;
 					var tempClass = "";
-					var alignment = "v";
+					var alignment = "h";
 					if(i===0) {
-						alignment = "h";
+						alignment = "v";
 						tempClass = "class='active'";
 					}
 					$("#shelterResults").append(
