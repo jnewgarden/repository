@@ -6,8 +6,10 @@ var zipCode = "";
 var shelterIdTag = "&id="
 var shelterId = "";
 var currentActive = "li0";
-var status = "&status=A&format=json&count=25"
+var status = "&status=A&format=json&count=15"
 var animal = "";
+var selectedPet = "pic0";
+
 //Prevent reload on enterKey down
 $("#zip_code").on("keydown", function(event) {
 	if($(this).val().length >= 5 && event.keyCode !== 8) event.preventDefault();
@@ -35,6 +37,31 @@ $("#btn-search").on("click", function(event) {
 		genericApiCall();
 	}
 });
+
+function onlyOnePetPic(event){
+	var clickedPet = $(event.target).attr("id");
+	
+	var descDiv = $("."+clickedPet);
+	if(clickedPet === selectedPet){
+		descDiv.css("display","none");
+		$("#"+clickedPet).css("background-color","#dddddd");
+		$("#"+clickedPet).css("width","50px");
+		$("#"+clickedPet).css("height","50px");
+		selectedPet = "";
+		return;
+	}
+	if(clickedPet !== selectedPet){
+		descDiv.css("display","inline-block");
+
+		$("#"+clickedPet).css("background-color","#009900");
+		$("#"+clickedPet).css("width","200px");
+		$("#"+clickedPet).css("height","200px");
+		if(selectedPet!=="")
+			$("#"+selectedPet).click();
+		selectedPet = clickedPet;
+	}
+	
+}
 
 var shelterTitleHolder;
 function moreBtn(event){
@@ -127,12 +154,6 @@ function genericApiCall(){
 						"</div>"
 					);
 					$('.collapsible').collapsible();
-					//console.log(_name);
-					//console.log(_phone);
-					//console.log(_email);
-					//console.log(_city);
-					//console.log(_state);
-					//console.log(_zip);
 				});
 				
 				}).fail( function(xhr, textStatus, errorThrown) {
@@ -155,15 +176,52 @@ function genericApiCall(){
 				}
 			}
 			$.ajax(settings).done(function (response) {
-				$(".body").html("");
+				$(".body").empty("");
 				$(".body").text(shelterTitleHolder);
 				$(".body").append("<br>");
-				$.each(response.petfinder.pets.pet,function(i){
-					$(".body").append("<img src='" + response.petfinder.pets.pet[i].media.photos.photo[0].$t + "'>");
-				})
+				
+				for(var i = 0; i < response.petfinder.pets.pet.length; i ++){
+					var desc = response.petfinder.pets.pet[i].description.$t;
+					var tempId = response.petfinder.pets.pet[i].id.$t;
+					
+					var tempPhoto = response.petfinder.pets.pet[i].media.photos.photo[1].$t;
+					var tempZero = "style='display: inline-block'";
+					var tempBg = "'background: #009900;"
+					var tempH = "200px;";
+					var tempW = "200px;"
+					if(i===0) selectedPet="pic"+tempId;
+					if (i !== 0) {
+						tempH = "50px;";
+						tempW = "50px;";
+						tempZero = "style='display: none'";
+						tempBg = "'background: #dddddd;"
+					}
+					
+					
+					$(".body").append(
+														"<div><img " +
+																"onclick = 'onlyOnePetPic(event)'" + 
+																"id='pic" + tempId + "'" +
+																"style = " + tempBg+
+																"width: "+ tempW +
+																"height: "+ tempH +
+																"border-radius:50%;"+
+																"display:inline-block;"+
+																"padding:2px;"+
+																"margin: 20px;"+
+																"margin-top: 20px;' "+
+																"src='" + tempPhoto +
+														"'><br>" +
+														"<div " + tempZero + " class='pic"+ tempId +"'>" +
+														"<hr>" + 
+														desc +
+														"</div></div>"
+														
+					);
+				}
 			});
 
-			console.log(tempUrl);
+			//console.log(tempUrl);
 			break;
 		default:
 			console.log("Invalid url request");
@@ -174,7 +232,11 @@ function genericApiCall(){
 function onlyOneOpen(e){
 	var tempId = $(e).parent().attr("id");
 	var tempClass = $(e).parent().attr("class");
-	if(tempId != currentActive && currentActive !== "" && tempClass !== "active"){
+
+	// Controls when clicked element is set to active
+	if(tempId !== currentActive && currentActive !== "" && tempClass !== "active"){
+
+		// Controls when previous open element is closed
 		if($("#" + currentActive).attr("class")==="active")
 			$("#" + currentActive).children().click();
 		currentActive = tempId;
