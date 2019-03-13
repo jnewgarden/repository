@@ -65,7 +65,6 @@ function onlyOnePetPic(event){
 
 var shelterTitleHolder;
 function moreBtn(event){
-	console.log("Clicked");
 	urlMethod = "shelter.getPets"
 	shelterId = $(event.path[5]).attr("id");
 	
@@ -78,7 +77,7 @@ function moreBtn(event){
 				"<li >" +
 					"<div class='collapsible-header' style='background-color: #009900; color: white;'>More Details</div>"+
 					"<div class='body' style='border-bottom: 1px solid #ddd; padding: 2rem;'><span>"+
-						"<h5 class='center-align'>"+ tempTitle +"</h5>" + 
+						"<h5 style='display:block;margin:auto;'>"+ tempTitle +"</h5>" + 
 						"<b> First Question </b><br>" +
 						"<b> Second Question </b><br>" +
 						"<b> Third Question </b><br>" + 
@@ -177,14 +176,21 @@ function genericApiCall(){
 			}
 			$.ajax(settings).done(function (response) {
 				$(".body").empty("");
-				$(".body").text(shelterTitleHolder);
+				$(".body").append("<h5 style='display:block; margin:auto;'>" + shelterTitleHolder + "</h5>");
 				$(".body").append("<br>");
+				$(".body").append("<hr>");
 				
 				for(var i = 0; i < response.petfinder.pets.pet.length; i ++){
 					var desc = response.petfinder.pets.pet[i].description.$t;
 					var tempId = response.petfinder.pets.pet[i].id.$t;
 					
-					var tempPhoto = response.petfinder.pets.pet[i].media.photos.photo[1].$t;
+					var tempPhoto = response.petfinder.pets.pet[i].media.photos.photo[2].$t;
+					var _name = response.petfinder.pets.pet[i].name.$t;
+					var _age = response.petfinder.pets.pet[i].age.$t;
+					var _animal = response.petfinder.pets.pet[i].animal.$t;
+					var _sex = response.petfinder.pets.pet[i].sex.$t;
+					var _size = response.petfinder.pets.pet[i].size.$t;
+					
 					var tempZero = "style='display: inline-block'";
 					var tempBg = "'background: #009900;"
 					var tempH = "200px;";
@@ -196,26 +202,34 @@ function genericApiCall(){
 						tempZero = "style='display: none'";
 						tempBg = "'background: #dddddd;"
 					}
+
+					if(desc===undefined){
+						desc ="Although our dear shelter pet hasn't been given the luxury of a description, we can tell you this pet deserves to be loved just as much as any other pet.";
+					}
 					
 					
 					$(".body").append(
-														"<div><img " +
+														"<div id='"+ tempId +"'>Click image for more details<img " +
 																"onclick = 'onlyOnePetPic(event)'" + 
 																"id='pic" + tempId + "'" +
 																"style = " + tempBg+
 																"width: "+ tempW +
 																"height: "+ tempH +
 																"border-radius:50%;"+
-																"display:inline-block;"+
+																"display:block;"+
 																"padding:2px;"+
-																"margin: 20px;"+
+																"margin: auto;"+
 																"margin-top: 20px;' "+
 																"src='" + tempPhoto +
-														"'><br>" +
+														"'><br><b>Name: </b>"+ _name +"<br>" +
+														"<b>Age: </b>"+ _age +"<br>" +
+														"<b>Animal: </b>"+ _animal +"<br>" +
+														"<b>Gender: </b>"+ _sex +"<br>" +
+														"<b>Size: </b>"+ _size +"<br>" +
+														//"<hr>"+
 														"<div " + tempZero + " class='pic"+ tempId +"'>" +
-														"<hr>" + 
-														desc +
-														"</div></div>"
+														"<u><b>Description:</b></u><br>" + desc +
+														"</div></div><hr>"
 														
 					);
 				}
