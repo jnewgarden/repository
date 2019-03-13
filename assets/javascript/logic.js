@@ -1,3 +1,4 @@
+//Used for building urls for api calls
 var apiKey = "?key=";
 var userLocation = "&location=";
 var urlMethod = "";
@@ -5,28 +6,37 @@ var queryUrl = "http://api.petfinder.com/";
 var zipCode = "";
 var shelterIdTag = "&id="
 var shelterId = "";
-var currentActive = "li0";
 var status = "&status=A&format=json&count=15"
 var animal = "";
-var selectedPet = "pic0";
 var tempStorage = '';
 
+//Use for only-one-open functions
+var currentActive = "li0";
+var selectedPet = "pic0";
+
+//Get and store api keys
 var database = firebase.database();
 database.ref().on("value",function(childSnapshot){
 	apiKey += childSnapshot.val().petfinderApi;
 	tempStorage = childSnapshot.val().googleMapsApi;
 });
+
 //Prevent reload on enterKey down
 $("#zip_code").on("keydown", function(event) {
+	// User can only press enter when 5 character exist in the input
+	// Allow for backspace to be pressed
 	if($(this).val().length >= 5 && event.keyCode !== 8) event.preventDefault();
     if (event.keyCode === 13) event.preventDefault();
   
 });
 
-//Handle zip content
+//Handle zip content (enter key)
 $("#zip_code").on("keyup", function(event) {
 	var tempZip = $(this).val();
+	// Checks again that the zipcode is 5 character
   if (event.keyCode === 13 && tempZip.length === 5) {
+		$("#shelterDetails").empty();
+		$("#shelterResults").empty().text("Please wait while the shelters near [ zipcode = "+ tempZip +" ] load...");;
 		urlMethod = "shelter.find";
 		zipCode = tempZip;
 		$(this).val("");
@@ -34,9 +44,13 @@ $("#zip_code").on("keyup", function(event) {
   }
 });
 
+//Handle zip content (submit button)
 $("#btn-search").on("click", function(event) {
 	var tempZip = $("#zip_code").val();
+	// Checks again that the zipcode is 5 character
 	if(tempZip.length===5){
+		$("#shelterDetails").empty();
+		$("#shelterResults").empty().text("Please wait while the shelters near [ zipcode = "+ tempZip +" ] load...");
 		urlMethod = "shelter.find";
 		zipCode = tempZip;
 		$("#zip_code").val("");
@@ -44,6 +58,7 @@ $("#btn-search").on("click", function(event) {
 	}
 });
 
+// Function that allows only 1 or 0 pet profiles to be toggled open
 function onlyOnePetPic(event){
 	var clickedPet = $(event.target).attr("id");
 	var descDiv = $("."+clickedPet);
@@ -67,6 +82,7 @@ function onlyOnePetPic(event){
 	}
 }
 
+// Generates google map location and button to show pets for shelter
 var shelterTitleHolder;
 function moreBtn(event){
 	var tempLatitude = parseFloat(event.path[2].children[8].innerText);
@@ -78,7 +94,7 @@ function moreBtn(event){
 	var tempTitle = $($(event.path[4]).children()[0]).text();
 	shelterTitleHolder = tempTitle;
 	
-	$("#shelterDetails").html("");
+	$("#shelterDetails").empty();
 	$("#shelterDetails").append(
 
 		"<div class='row' style='margin-bottom: 0;'>" +
@@ -86,17 +102,18 @@ function moreBtn(event){
 				"<li >" +
 					"<div class='collapsible-header' style='background-color: #009900; color: white;'>More Details</div>"+
 					"<div style='height:200px;'>" +
-						"<div id='map' style='height: 100%;'></div>" +
-						
+						"<div id='map' style='height: 100%;'>"+
+						// Map placed here by initMap()
 						"</div>" +
-						"<script>" +
-						"var map;" +
-						"function initMap() {" +
-							"map = new google.maps.Map(document.getElementById('map'), {" +
-								"center: {lat: "+tempLatitude+", lng: "+tempLongitude+"}," +
-								"zoom: 8" +
-							"});" + 
-						"}" +
+					"</div>" +
+					"<script>" +
+					"var map;" +
+					"function initMap() {" +
+						"map = new google.maps.Map(document.getElementById('map'), {" +
+							"center: {lat: "+tempLatitude+", lng: "+tempLongitude+"}," +
+							"zoom: 8" +
+						"});" + 
+					"}" +
 					"</script>" +
 					"<script src='https://maps.googleapis.com/maps/api/js?key="+ tempStorage +"&callback=initMap'"+
 						"async defer></script>" +
@@ -267,6 +284,7 @@ function genericApiCall(){
 	}
 }
 
+// Function that allows only 1 or 0 Shelter tabs to be toggled open
 function onlyOneOpen(e){
 	var tempId = $(e).parent().attr("id");
 	var tempClass = $(e).parent().attr("class");
@@ -280,15 +298,13 @@ function onlyOneOpen(e){
 		currentActive = tempId;
 		return;
 	}
-
-	
-
 };
 
 // document ready function
 $(document).ready(function(){
+	// Took over the background-color css for this button
 	$("#btn-search").css("background-color","#009900");
 });
 
-// dropdown jquery
+// dropdown jquery (not used currently)
 $(".dropdown-trigger").dropdown();
