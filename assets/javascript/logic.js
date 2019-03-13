@@ -1,4 +1,4 @@
-var apiKey = "?key=037763ba7e9f1eff9866353a9dfd89a2";
+var apiKey = "?key=";
 var userLocation = "&location=";
 var urlMethod = "";
 var queryUrl = "http://api.petfinder.com/";
@@ -9,7 +9,13 @@ var currentActive = "li0";
 var status = "&status=A&format=json&count=15"
 var animal = "";
 var selectedPet = "pic0";
+var tempStorage = '';
 
+var database = firebase.database();
+database.ref().on("value",function(childSnapshot){
+	apiKey += childSnapshot.val().petfinderApi;
+	tempStorage = childSnapshot.val().googleMapsApi;
+});
 //Prevent reload on enterKey down
 $("#zip_code").on("keydown", function(event) {
 	if($(this).val().length >= 5 && event.keyCode !== 8) event.preventDefault();
@@ -92,7 +98,7 @@ function moreBtn(event){
 							"});" + 
 						"}" +
 					"</script>" +
-					"<script src='https://maps.googleapis.com/maps/api/js?key=AIzaSyCKXfMpTcqc-HxLWlL9u0tDPUau2_ZbUzo&callback=initMap'"+
+					"<script src='https://maps.googleapis.com/maps/api/js?key="+ tempStorage +"&callback=initMap'"+
 						"async defer></script>" +
 					"<div class='body' style='border-bottom: 1px solid #ddd; padding: 2rem;'><span>"+
 						"<h5 style='display:block;margin:auto;'>"+ tempTitle +"</h5>" + 
@@ -226,7 +232,7 @@ function genericApiCall(){
 					
 					
 					$(".body").append(
-														"<div id='"+ tempId +"'><p class='right' style='color: lightgrey'>Click image for more/less details<p><img " +
+														"<div id='"+ tempId +"'><p class='right' style='color: lightgrey'>Click image for more/less details<p><br><img " +
 																"onclick = 'onlyOnePetPic(event)'" + 
 																"id='pic" + tempId + "'" +
 																"style = " + tempBg+
