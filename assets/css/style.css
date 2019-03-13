@@ -1,36 +1,27 @@
-/* Elements */
-/* div {
-    border: black 1px solid;
-} */
 
-
-
-/* Classes */
 .nav-wrapper {
     background-color: #009900;
     color: rgba(143, 20, 20, 0.986);
 }
+.info {
+    margin: auto; width:60%; text-align: center; font-family: cursive;
+}
 
+#logo{
+width:400px; height:174px;
+}
 
-
-
-
-
-/* ID's */
 #fixIt {
     align-content: center;
     margin: auto;
-    float: unset;
-    float: none;
+    width: 60%;
+    text-align: center;
+    font-family: cursive;   
 }
 #zip_code, placeholder {
     text-align: center;
     font-size: 35px;
     border-bottom-color: #009900;
     border-bottom-style: solid;
-}
-
-#search-btn{
-    margin: auto;
-    width: 40%;
+    width: 300px;  
 }
