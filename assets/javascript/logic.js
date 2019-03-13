@@ -39,6 +39,7 @@ $("#zip_code").on("keyup", function(event) {
 		$("#shelterResults").empty().text("Please wait while the shelters near [ zipcode = "+ tempZip +" ] load...");;
 		urlMethod = "shelter.find";
 		zipCode = tempZip;
+		$("#ad-card").empty();
 		$(this).val("");
 		genericApiCall();
   }
@@ -53,6 +54,7 @@ $("#btn-search").on("click", function(event) {
 		$("#shelterResults").empty().text("Please wait while the shelters near [ zipcode = "+ tempZip +" ] load...");
 		urlMethod = "shelter.find";
 		zipCode = tempZip;
+		$("#ad-card").empty();
 		$("#zip_code").val("");
 		genericApiCall();
 	}
