@@ -170,12 +170,18 @@ function genericApiCall(){
 					if(_zip===undefined) _phone = "N/A";
 					var _id = response.petfinder.shelters.shelter[i].id.$t;
 					var tempClass = "";
-					if(i===0) tempClass = "class='active'";
+					var alignment = "v";
+					if(i===0) {
+						alignment = "h";
+						tempClass = "class='active'";
+					}
 					$("#shelterResults").append(
 						"<div class='row rowCell' style='margin-bottom: 0;' id='cell" + i + "'>" +
 							"<ul class='collapsible style' style='margin: 0;' id= '" + _id + "'>" +
 								"<li id='li" + i + "'" + tempClass + ">" +
-									"<div class='collapsible-header' style='background-color: #009900; color: white;' onClick='onlyOneOpen(this)'>"+"<i class='fa fa-ellipsis-v'></i>"+_name+"</div>"+
+									"<div class='collapsible-header' style='background-color: #009900; color: white;' onClick='onlyOneOpen(this)'>"+
+									"<i class='fa fa-ellipsis-"+ alignment +"'></i>"+_name+
+									"</div>"+
 									"<div class='collapsible-body'><span>"+
 										"<b>Name: </b>" + _name + "<br>" +
 										"<b>Phone number: </b>" + _phone + "<br>" +
@@ -292,12 +298,25 @@ function onlyOneOpen(e){
 	var tempId = $(e).parent().attr("id");
 	var tempClass = $(e).parent().attr("class");
 
+
+	var tempIcon = $($(e).parent(".div").prevObject[0].children[0]);
+	var tempIconClass = tempIcon.attr("class");
+	
+	if (tempIconClass === "fa fa-ellipsis-v"){
+		tempIcon.removeClass(tempIconClass);
+		tempIcon.addClass("fa fa-ellipsis-h");
+	} else {
+		tempIcon.removeClass(tempIconClass);
+		tempIcon.addClass("fa fa-ellipsis-v");
+	}
+	//="fa fa-ellipsis-h");
 	// Controls when clicked element is set to active
 	if(tempId !== currentActive && currentActive !== "" && tempClass !== "active"){
 
 		// Controls when previous open element is closed
 		if($("#" + currentActive).attr("class")==="active")
 			$("#" + currentActive).children().click();
+		//console.log("I'm active");
 		currentActive = tempId;
 		return;
 	}
