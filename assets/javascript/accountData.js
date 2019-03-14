@@ -5,10 +5,18 @@ var firstName = "";
 var lastName = "";
 
 
-$("#submit").on("click", function(signIn)){
-    if (email === "" && password === "" && firstName === "" && lastName = "")
+$(".submit-create").on("click", function(){
+    if (email === "" || password === "" || firstName === "" || lastName === ""){
+        console.log("please fill all fields");
+    }
+    // else {
+    //     email = $(this).val();
+    //     console.log($(this));
+    // }
 
-}
+});
+
+
 
 // Register a new user
 firebase.auth().createUserWithEmailAndPassword(email, password)
