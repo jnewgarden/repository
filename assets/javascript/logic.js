@@ -25,8 +25,14 @@ database.ref().on("value",function(childSnapshot){
 $("#zip_code").on("keydown", function(event) {
 	// User can only press enter when 5 character exist in the input
 	// Allow for backspace to be pressed
-	if($(this).val().length >= 5 && event.keyCode !== 8) event.preventDefault();
-    if (event.keyCode === 13) event.preventDefault();
+
+	if($(this).val().length >= 5 && event.keyCode !== 8) {
+		event.preventDefault();
+	}
+
+  if (event.keyCode === 13) {
+		event.preventDefault();
+	}
   
 });
 
@@ -134,7 +140,7 @@ function genericApiCall(){
 	switch (urlMethod){
 
 		case 'shelter.find':
-			$("#shelterResult").html("Please wait while shelters close by are loaded");
+			//$("#shelterResult").html("Please wait while shelters close by are loaded");
 			var tempUrl = queryUrl + urlMethod + apiKey + userLocation + zipCode +"&format=json&count=10";
 			var proxyURL = "https://cors-anywhere.herokuapp.com/";
 			var settings = {
@@ -207,6 +213,8 @@ function genericApiCall(){
 			});
 			
 			break;
+
+			
 		case 'shelter.getPets':
 			$(".body").text("Please wait while the good bois and gals are loaded");
 			var tempUrl = queryUrl + urlMethod + apiKey + shelterIdTag + shelterId + status;
