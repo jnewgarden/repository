@@ -1,11 +1,29 @@
+// variables
+var email = "";
+var password = "";
+var firstName = "";
+var lastName = "";
 
-        // Initialize Firebase
-        var config = {
-            apiKey: "AIzaSyD4XEQTSSGXKScb2OWlrXiQHvLV-7Hu4eU",
-        authDomain: "petawesome-90b32.firebaseapp.com",
-        databaseURL: "https://petawesome-90b32.firebaseio.com",
-        projectId: "petawesome-90b32",
-        storageBucket: "petawesome-90b32.appspot.com",
-        messagingSenderId: "344811635391"
-    };
-    firebase.initializeApp(config);
+
+$("#submit").on("click", function(signIn)){
+    if (email === "" && password === "" && firstName === "" && lastName = "")
+
+}
+
+// Register a new user
+firebase.auth().createUserWithEmailAndPassword(email, password)
+    .catch(function (err) {
+        // Handle errors
+    });
+
+// Sign in existing user
+firebase.auth().signInWithEmailAndPassword(email, password)
+    .catch(function (err) {
+        // Handle errors
+    });
+
+// Sign out user
+firebase.auth().signOut()
+    .catch(function (err) {
+        // Handle errors
+    });
