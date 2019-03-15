@@ -198,7 +198,7 @@ function genericApiCall(){
 										"<p id='latitude' style='display:none'>" + _latitude + "</p>" +
 										"<p id='latitude' style='display:none'>" + _longitude + "</p>" +
 										"<div class='button' id='btn-more' style='padding-bottom: 26px'>" +
-										"<button id='more-btn' onclick='moreBtn(event)' class='right btn waves-effect waves-light' style='background-color: #009900'> Click for more </button>" +
+										"<button id='more-btn' onclick='moreBtn(event)' class='right btn waves-effect waves-light' style='background-color: #009900'> See more </button>" +
 										"</div>" +
 										"</span></div>" +
 								"</li>" +
@@ -268,7 +268,7 @@ function genericApiCall(){
 					
 					
 					$(".body").append(
-														"<div id='"+ tempId +"'><p class='right' style='color: lightgrey'>Click image for more/less details<p><br><img " +
+														"<div id='"+ tempId +"'><img " +
 																"onclick = 'onlyOnePetPic(event)'" + 
 																"id='pic" + tempId + "'" +
 																"style = " + tempBg+
