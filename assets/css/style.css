@@ -26,16 +26,26 @@ width:400px; height:174px;
     border-bottom-style: solid;
     width: 300px;  
 }
+#shelterDetails {
+  
+  width: 50%;
+  margin: auto;
+}
+
 
 /* The side navigation menu */
 .sidebar {
     margin: 0;
     padding: 0;
-    width: 200px;
+    width: 250px;
     /*background-color: #f1f1f1; */
+    top: 65px;
+    text-overflow: ellipsis;
+    
+    overflow: hidden;
     position: fixed;
     height: 100%;
-    overflow: auto;
+    overflow: none;
   }
   
   /* Page content. The value of the margin-left property should match the value of the sidebar's width property */
