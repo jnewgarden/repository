@@ -22,11 +22,34 @@ var sex = "";
 var loc = "";
 var age = "";
 //var offset = "";
-var urlEnding = "&count=15&format=json";
+var urlEnding = "&count=15&output=full&format=json";
 
 
 var database = firebase.database();
 
+
+function onlyOnePetPic(event){
+	var clickedPet = $(event.target).attr("id");
+	var descDiv = $("."+clickedPet);
+
+	if(clickedPet === selectedPet){
+		descDiv.css("display","none");
+		$("#"+clickedPet).css("background-color","#dddddd");
+		$("#"+clickedPet).css("width","150px");
+		$("#"+clickedPet).css("height","150px");
+		selectedPet = "";
+		return;
+	}
+	if(clickedPet !== selectedPet){
+		descDiv.css("display","inline-block");
+		$("#"+clickedPet).css("background-color","#009900");
+		$("#"+clickedPet).css("width","200px");
+		$("#"+clickedPet).css("height","200px");
+		if(selectedPet!=="")
+			$("#"+selectedPet).click();
+		selectedPet = clickedPet;
+	}
+}
 
 //console.log(dynamicContent);
 if(dynamicContent==="Eminem"){
@@ -34,7 +57,7 @@ if(dynamicContent==="Eminem"){
     //return;
 }
 else {
-    animal = "&animal=" +  dynamicContent;
+    animal = "&animal=" +  dynamicContent.toLowerCase();
     $('select').formSelect();
     
     $("#motto").text(dynamicContent);
@@ -72,7 +95,7 @@ $("#submit-btn").on("click",function(e){
 
     var tempAnimal = $("#animal").val();
     if(tempAnimal!==null) animal = "&animal=" + tempAnimal;
-    else{
+    else if(animal===""){
         console.log("required");
         return;
     }
@@ -109,4 +132,99 @@ $("#submit-btn").on("click",function(e){
     var tempUrlBuild = queryUrl + urlMethod + key+animal+breed+breed+size+loc+age+urlEnding;
     $(".with-header").hide();
     console.log(tempUrlBuild);
+
+    // Load search onto page
+    $(".container").append("<p class='center' id='containerStatus'>Please wait while the good bois and gals are loaded</p>");
+    //var tempUrl = queryUrl + urlMethod + apiKey + shelterIdTag + shelterId + status;
+    var proxyURL = "https://cors-anywhere.herokuapp.com/";
+    var settings = {
+        "async": true,
+        "crossDomain": true,
+        "url": proxyURL+tempUrlBuild,
+        "method": "GET",
+        "headers": {
+            "cache-control": "no-cache",
+        },
+        "data": {
+        }
+    }
+    $.ajax(settings).done(function (response) {
+        console.log(response.petfinder.pet);
+
+
+        if(response.petfinder.pet.length === 0){
+            $("#containerStatus").text("This shelter has no documented pets.");
+            return;
+        }
+        for(var i = 0; i < response.petfinder.pet.length; i ++){
+        var desc = response.petfinder.pet[i].description.$t;
+        var tempId = response.petfinder.pet[i].id.$t;
+        
+
+        var tempPhoto;
+        try {
+        tempPhoto = response.petfinder.pet[i].media.photos.photo[2].$t;
+        } catch(err){
+            tempPhoto = "";
+        }
+        var _name = response.petfinder.pet[i].name.$t;
+        var _age = response.petfinder.pet[i].age.$t;
+        var _animal = response.petfinder.pet[i].animal.$t;
+        var _sex = response.petfinder.pet[i].sex.$t;
+        var _size = response.petfinder.pet[i].size.$t;
+        var _breed = response.petfinder.pet[i].breeds.breed.$t
+        
+        var tempZero = "style='display: inline-block'";
+        var tempBg = "'background: #009900;"
+        var tempH = "200px;";
+        var tempW = "200px;";
+        var alignment = "v";
+        if(i===0) {
+            selectedPet="pic"+tempId;
+            alignment = "h";
+        }
+        if (i !== 0) {
+            tempH = "150px;";
+            tempW = "150px;";
+            tempZero = "style='display: none'";
+            tempBg = "'background: #dddddd;"
+        }
+        $("#containerStatus").text("");
+        $(".container").append(
+            "<div id='"+ tempId +"'>" +
+                //"<i class='fa fa-ellipsis-"+ alignment +"'></i>"+
+                "<img " +
+                    "onclick = 'onlyOnePetPic(event)'" + 
+                    "id='pic" + tempId + "'" +
+                    "style = " + tempBg+
+                    "width: "+ tempW +
+                    "height: "+ tempH +
+                    "border-radius:50%;"+
+                    "display:block;"+
+                    "padding:2px;"+
+                    "margin: auto;"+
+                    "margin-top: 20px;' "+
+                    "src='" + tempPhoto +
+                "'>"+
+                "<br>"+
+                "<h4 class='center'>"+
+                    "<b>"+ _name +
+                    "</b>"+
+                "</h4>"+
+                "<br>" +
+            
+            //"<hr>"+
+                "<div " + tempZero + " class='pic"+ tempId +"'>" +
+                    "<b>Age: </b>"+ _age +"<br>" +
+                    "<b>Animal: </b>"+ _animal +"<br>" +
+                    "<b>Gender: </b>"+ _sex +"<br>" +
+                    "<b>Size: </b>"+ _size +"<br>" +
+                    "<b>Breed: </b>"+ _breed +"<br>" +
+                    "<u><b>Description:</b></u><br>" + desc +
+                "</div>"+
+            "</div><hr>"
+            
+        );
+        }
+    });
 })

@@ -253,8 +253,12 @@ function genericApiCall(){
 					var tempZero = "style='display: inline-block'";
 					var tempBg = "'background: #009900;"
 					var tempH = "200px;";
-					var tempW = "200px;"
-					if(i===0) selectedPet="pic"+tempId;
+					var tempW = "200px;";
+					var alignment = "v";
+					if(i===0) {
+						selectedPet="pic"+tempId;
+						alignment = "h";
+					}
 					if (i !== 0) {
 						tempH = "150px;";
 						tempW = "150px;";
@@ -268,7 +272,9 @@ function genericApiCall(){
 					
 					
 					$(".body").append(
-														"<div id='"+ tempId +"'><img " +
+														"<div id='"+ tempId +"'>" +
+														//"<i class='fa fa-ellipsis-"+ alignment +"'></i>"+
+														"<img " +
 																"onclick = 'onlyOnePetPic(event)'" + 
 																"id='pic" + tempId + "'" +
 																"style = " + tempBg+
