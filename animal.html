@@ -10,7 +10,8 @@
     <link rel="stylesheet" href="assets/css/style.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
+ <!-- Compiled and minified JavaScript -->
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 
     <title>Animal</title>
 </head>
@@ -34,7 +35,30 @@
         <div class="col s12">
             <div class="info">
                 <img src="assets/images/Logo.jpeg" alt="logo" id="logo">
-                <h3 id="motto">Awesome Way to Find & Adopt a Pet Near You</h3>
+                <h3 id="motto"></h3>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col s3">
+            </div>
+
+            <div class="col s6">
+                <ul class="collection with-header">
+                    <li class="collection-header center" style='background-color: #009900; color: white'><h4>Refine your search</h4><p class="center">(Optional)</p></li>
+                    <li class="collection-item">Zip</li>
+                    <li class="collection-item">Age</li>
+                    <li class="collection-item">Size</li>
+                    <li class="collection-item">Gender</li>
+                    <li class="collection-item">Breed</li>
+                    <div class="btn-wrapper">
+                            <button id='more-btn' onclick class='right btn waves-effect waves-light' style='background-color: #009900'> Submit </button>
+
+                    </div>
+            </div>
+
+            <div class="col s3">
             </div>
         </div>
     </div>

@@ -33,6 +33,7 @@ if(dynamicContent==="Eminem"){
     //return;
 }
 else {
+    
     $("#motto").text(dynamicContent);
 
     // Add database key access here
