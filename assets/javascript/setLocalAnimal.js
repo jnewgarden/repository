@@ -136,7 +136,7 @@ $("#submit-btn").on("click",function(e){
     // Load search onto page
     $(".container").append("<p class='center' id='containerStatus'>Please wait while the good bois and gals are loaded</p>");
     //var tempUrl = queryUrl + urlMethod + apiKey + shelterIdTag + shelterId + status;
-    var proxyURL = "https://cors-anywhere.herokuapp.com/";
+    var proxyURL = "";// = "https://cors-anywhere.herokuapp.com/";
     var settings = {
         "async": true,
         "crossDomain": true,
