@@ -1,4 +1,10 @@
 
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+
 .nav-wrapper {
     background-color: #009900;
     color: rgba(143, 20, 20, 0.986);
@@ -41,11 +47,12 @@ width:400px; height:174px;
     /*background-color: #f1f1f1; */
     top: 65px;
     text-overflow: ellipsis;
-    
     overflow: hidden;
     position: fixed;
-    height: 100%;
-    overflow: none;
+    min-height: 85%;
+    max-height: 85%;
+    bottom: 0;
+    overflow: scroll;
   }
   
   /* Page content. The value of the margin-left property should match the value of the sidebar's width property */
