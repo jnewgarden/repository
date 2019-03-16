@@ -47,13 +47,54 @@
             <div class="col s6">
                 <ul class="collection with-header">
                     <li class="collection-header center" style='background-color: #009900; color: white'><h4>Refine your search</h4><p class="center">(Optional)</p></li>
-                    <li class="collection-item">Zip</li>
-                    <li class="collection-item">Age</li>
-                    <li class="collection-item">Size</li>
-                    <li class="collection-item">Gender</li>
-                    <li class="collection-item">Breed</li>
+                    <li class="collection-item center"> 
+                        <div class="input-field">
+                            <input placeholder="Enter Zip Code" id="zip_code" type="number" maxlength="5" class="validate">
+                        </div>
+                    </li>
+                    <li class="collection-item" id="otherId" hidden>
+                        <select id="animal">
+                            <option value="" disabled selected>Animal (must select)</option>
+                            <option value="barnyard">Barnyard</option>
+                            <option value="bird">Bird</option>
+                            <option value="horse">Horse</option>
+                            <option value="reptile">Reptile</option>
+                            <option value="smallfurry">Smallfurry</option>
+                        </select>
+                    </li>
+                    <li class="collection-item">
+                        <select id="age">
+                            <option value="" disabled selected>Age (requires zipcode)</option>
+                            <option value="Baby">Baby</option>
+                            <option value="Young">Young</option>
+                            <option value="Adult">Adult</option>
+                            <option value="Senior">Senior</option>
+                        </select>
+                    </li>
+                    <li class="collection-item">
+                        <select id="size">
+                            <option value="" disabled selected>Size</option>
+                            <option value="Small">Small</option>
+                            <option value="Medium">Medium</option>
+                            <option value="Large">Large</option>
+                            <option value="XL">Extra Large</option>
+                        </select>
+                    </li>
+                    <li class="collection-item">
+                        <select id="gender">
+                            <option value="" disabled selected>Gender</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                        </select>
+                    </li>
+                    <li class="collection-item" id="breedId">
+                        <select id="breed">
+                            <option value="" disabled selected>Breed</option>
+                        </select>
+                    </li>
                     <div class="btn-wrapper">
-                            <button id='more-btn' onclick class='right btn waves-effect waves-light' style='background-color: #009900'> Submit </button>
+                            <button id='submit-btn' onclick class='left btn waves-effect waves-light' style='background-color: #009900'> Submit </button>
+                            <button id='skip-btn' onclick class='right btn waves-effect waves-light' style='background-color: gray'> Skip </button>
 
                     </div>
             </div>
@@ -62,6 +103,20 @@
             </div>
         </div>
     </div>
+
+    <script src="https://www.gstatic.com/firebasejs/5.8.6/firebase.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyCske3mJ2ApUAsozgJbZ2855ecvMLzjons",
+            authDomain: "petawesomeapi-keys.firebaseapp.com",
+            databaseURL: "https://petawesomeapi-keys.firebaseio.com",
+            projectId: "petawesomeapi-keys",
+            storageBucket: "petawesomeapi-keys.appspot.com",
+            messagingSenderId: "167854498400"
+        };
+        firebase.initializeApp(config);
+    </script>
 
 
     <script src="assets/javascript/setLocalAnimal.js"></script>
