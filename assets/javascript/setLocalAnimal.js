@@ -149,7 +149,8 @@ $("#submit-btn").on("click",function(e){
         }
     }
     $.ajax(settings).done(function (response) {
-        console.log(response.petfinder.pet);
+        
+        //if(response.petfinder.pet===undefined);
 
 
         if(response.petfinder.pet.length === 0){
@@ -188,6 +189,9 @@ $("#submit-btn").on("click",function(e){
             tempW = "150px;";
             tempZero = "style='display: none'";
             tempBg = "'background: #dddddd;"
+        }
+        if(desc===undefined){
+            desc ="Although our dear shelter pet hasn't been given the luxury of a description, we can tell you this pet deserves to be loved just as much as any other pet.";
         }
         $("#containerStatus").text("");
         $(".container").append(
