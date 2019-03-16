@@ -13,7 +13,7 @@ function getParameterByName(name, url) {
 
 // Give the parameter a variable name
 var dynamicContent = getParameterByName('animal');
-var queryUrl = "http://api.petfinder.com/";
+var queryUrl = "https://api.petfinder.com/";
 var key= "?key=";
 var animal = "";
 var breed = "";
@@ -54,6 +54,14 @@ function onlyOnePetPic(event){
 //console.log(dynamicContent);
 if(dynamicContent==="Eminem"){
     $("#motto").text("Mom's spaghetti");
+    //return;
+}
+else if(dynamicContent==="Pewdiepie"){
+    $("#motto").text("Bitch lasagna");
+    //return;
+}
+else if(dynamicContent==="Nadia"){
+    $("#motto").text("Sistuh");
     //return;
 }
 else {
@@ -136,11 +144,11 @@ $("#submit-btn").on("click",function(e){
     // Load search onto page
     $(".container").append("<p class='center' id='containerStatus'>Please wait while the good bois and gals are loaded</p>");
     //var tempUrl = queryUrl + urlMethod + apiKey + shelterIdTag + shelterId + status;
-    var proxyURL = "";// = "https://cors-anywhere.herokuapp.com/";
+    var proxyURL = "https://cors-anywhere.herokuapp.com/";
     var settings = {
         "async": true,
         "crossDomain": true,
-        "url": proxyURL+tempUrlBuild,
+        "url": tempUrlBuild,
         "method": "GET",
         "headers": {
             "cache-control": "no-cache",
