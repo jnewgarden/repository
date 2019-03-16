@@ -32,13 +32,6 @@ width:400px; height:174px;
     border-bottom-style: solid;
     width: 300px;  
 }
-#shelterDetails {
-  
-  width: 50%;
-  margin: auto;
-}
-
-
 /* The side navigation menu */
 .sidebar {
     margin: 0;
@@ -57,9 +50,9 @@ width:400px; height:174px;
   
   /* Page content. The value of the margin-left property should match the value of the sidebar's width property */
   div.content {
-    margin-left: 200px;
+    margin-left: 250px;
     padding: 1px 16px;
-    height: 1000px;
+    height: 100%;
   }
   
   /* On screens that are less than 700px wide, make the sidebar into a topbar , we also style other page contents*/
