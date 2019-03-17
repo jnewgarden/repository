@@ -1,4 +1,3 @@
-
 // Parse the URL parameter
 function getParameterByName(name, url) {
     if (!url) url = window.location.href;
@@ -9,7 +8,6 @@ function getParameterByName(name, url) {
     if (!results[2]) return '';
     return decodeURIComponent(results[2].replace(/\+/g, " "));
 }
-
 
 // Give the parameter a variable name
 var dynamicContent = getParameterByName('animal');
@@ -24,19 +22,25 @@ var age = "";
 //var offset = "";
 var urlEnding = "&count=15&output=full&format=json";
 
-
 var database = firebase.database();
 
-
 function onlyOnePetPic(event){
-	var clickedPet = $(event.target).attr("id");
-	var descDiv = $("."+clickedPet);
+    var clickedPet = $(event.target).attr("id");
+    var descDiv = $("."+clickedPet);
+	var iconId = clickedPet.substring(3);
 
 	if(clickedPet === selectedPet){
 		descDiv.css("display","none");
 		$("#"+clickedPet).css("background-color","#dddddd");
 		$("#"+clickedPet).css("width","150px");
-		$("#"+clickedPet).css("height","150px");
+        $("#"+clickedPet).css("height","150px");
+        
+        var iconHolder = $($("#"+iconId).children()[0]);
+		var tempClass = iconHolder.attr("class");
+		iconHolder.removeClass(tempClass);
+		iconHolder.addClass("fa fa-ellipsis-v");
+		iconHolder.css("color","#dddddd");
+
 		selectedPet = "";
 		return;
 	}
@@ -44,11 +48,23 @@ function onlyOnePetPic(event){
 		descDiv.css("display","inline-block");
 		$("#"+clickedPet).css("background-color","#009900");
 		$("#"+clickedPet).css("width","200px");
-		$("#"+clickedPet).css("height","200px");
+        $("#"+clickedPet).css("height","200px");
+        
+        var iconHolder = $($("#"+iconId).children()[0]);
+		var tempClass = iconHolder.attr("class");
+		iconHolder.removeClass(tempClass);
+		iconHolder.addClass("fa fa-ellipsis-h");
+		iconHolder.css("color","#009900");
+
 		if(selectedPet!=="")
 			$("#"+selectedPet).click();
 		selectedPet = clickedPet;
 	}
+}
+
+function iconClick(event){
+	// Finds image in the div and clicks it
+	$("img#" + $(event.target).attr("name")).click();
 }
 
 //console.log(dynamicContent);
@@ -101,12 +117,6 @@ $("#submit-btn").on("click",function(e){
     var tempZipcode = $("#zip_code").val();
     if(tempZipcode!=="") loc = "&location=" + tempZipcode;
 
-    var tempAnimal = $("#animal").val();
-    if(tempAnimal!==null) animal = "&animal=" + tempAnimal;
-    else if(animal===""){
-        console.log("required");
-        return;
-    }
     var tempAge = $("#age").val();
     if(tempAge!==null) {
         if(tempZipcode.length!==5){
@@ -140,21 +150,21 @@ $("#submit-btn").on("click",function(e){
     var tempUrlBuild = queryUrl + urlMethod + key+animal+breed+breed+size+loc+age+urlEnding;
     $(".with-header").hide();
     console.log(tempUrlBuild);
-
+    
     // Load search onto page
     $(".container").append("<p class='center' id='containerStatus'>Please wait while the good bois and gals are loaded</p>");
     //var tempUrl = queryUrl + urlMethod + apiKey + shelterIdTag + shelterId + status;
-    var proxyURL = "https://cors-anywhere.herokuapp.com/";
+    var proxyURL = "";
     var settings = {
         "async": true,
         "crossDomain": true,
-        "url": tempUrlBuild,
+        "url": proxyURL + tempUrlBuild,
         "method": "GET",
         "headers": {
             "cache-control": "no-cache",
         },
         "data": {
-        }
+        },
     }
     $.ajax(settings).done(function (response) {
         
@@ -188,9 +198,11 @@ $("#submit-btn").on("click",function(e){
         var tempH = "200px;";
         var tempW = "200px;";
         var alignment = "v";
+        var tempIconColor = "#dddddd";
         if(i===0) {
             selectedPet="pic"+tempId;
             alignment = "h";
+            tempIconColor = "#009900"
         }
         if (i !== 0) {
             tempH = "150px;";
@@ -204,7 +216,7 @@ $("#submit-btn").on("click",function(e){
         $("#containerStatus").text("");
         $(".container").append(
             "<div id='"+ tempId +"'>" +
-                //"<i class='fa fa-ellipsis-"+ alignment +"'></i>"+
+            "<i onclick='iconClick(event)' style='width:40px; font-size:2rem; color: "+ tempIconColor +"' id='"+ tempId +"' name='pic"+ tempId +"'class='fa fa-ellipsis-"+ alignment +"'></i>"+
                 "<img " +
                     "onclick = 'onlyOnePetPic(event)'" + 
                     "id='pic" + tempId + "'" +
