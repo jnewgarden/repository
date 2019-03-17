@@ -120,12 +120,12 @@ function moreBtn(event){
 	$("#shelterDetails").empty();
 	$("#shelterDetails").append(
 
-		"<div class='row' style='margin-bottom: 0;'>" +
+		//"<div class='row' style='margin-bottom: 0;'>" +
 			"<ul style='margin: 0;'>" +
 				"<li >" +
-					"<div class='collapsible-header' style='background-color: #009900; color: white;'>More Details</div>"+
-					"<div style='height:200px;'>" +
-						"<div id='map' style='height: 100%;'>"+
+					"<div class='collapsible-header' style='background-color: #009900; color: white'>More Details</div>"+
+					"<div style='height:200px'>" +
+						"<div id='map' style='height: 100%'>"+
 						// Map placed here by initMap()
 						"</div>" +
 					"</div>" +
@@ -146,8 +146,8 @@ function moreBtn(event){
 						"<button id ='skipQuestions' onclick='genericApiCall()' class='btn waves-effect waves-light' style='background-color: #009900'>Show Available Pets</button></div>" +
 						"</span></div>" +
 				"</li>" +
-			"</ul>" +
-		"</div>");
+			"</ul>"); //+
+		//"</div>");
 }
 
 function genericApiCall(){

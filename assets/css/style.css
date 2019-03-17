@@ -32,6 +32,7 @@ width:400px; height:174px;
     border-bottom-style: solid;
     width: 300px;  
 }
+
 /* The side navigation menu */
 .sidebar {
     margin: 0;
@@ -53,6 +54,7 @@ width:400px; height:174px;
     margin-left: 250px;
     padding: 1px 16px;
     height: 100%;
+    
   }
   
   /* On screens that are less than 700px wide, make the sidebar into a topbar , we also style other page contents*/
@@ -87,5 +89,121 @@ width:400px; height:174px;
     .sidebar a {
       text-align: center;
       float: none;
+    }
+    div.content{
+      margin-top: 5px;
+    }
+  }
+
+  #ad-card{
+    margin-top: 70px;
+}
+.collapsible.style{
+    max-width: 280px;
+    min-width: 280px;
+}
+
+@media (max-width: 700px){
+    .rowCell{
+        max-width: 90%;
+        min-width:90%;
+        margin: auto;
+    }
+    .collapsible.style{
+        max-width: 100%;
+        min-width:100%;
+    }
+}
+.navbar{
+    background-color: #009900!important;
+
+}
+.navbar-brand{
+    padding: 0;
+    padding-left: 20px;
+    color: white!important;
+
+}
+
+@media (min-width: 992px){
+    a.nav-link{
+        color:white!important;
+    }
+    .navbar{
+        z-index: 999;
+    }
+    .navbar ul,a{
+        max-height: 64px;
+    }
+    .mr-auto{
+        margin-right: 0px!important;
+        margin-left: auto;
+    }
+}
+
+/* nav bar styles */
+
+.collapsible.style{
+  max-width: 280px;
+  min-width: 280px;
+}
+
+@media (max-width: 700px){
+  .rowCell{
+      max-width: 90%;
+      min-width:90%;
+      margin: auto;
+  }
+  .collapsible.style{
+      max-width: 100%;
+      min-width:100%;
+  }
+}
+.navbar{
+  background-color: #009900!important;
+
+}
+.navbar-brand{
+  padding: 0;
+  padding-left: 20px;
+  color: white!important;
+
+}
+
+@media (min-width: 992px){
+  a.nav-link{
+      color:white!important;
+  }
+  .navbar{
+      z-index: 999;
+  }
+  .navbar ul,a{
+      max-height: 64px;
+  }
+  .mr-auto{
+      margin-right: 0px!important;
+      margin-left: auto;
+  }
+}
+@media (max-width: 991px){
+    button.navbar-toggler:focus{
+        background-color:#009900;
+        border: 1px solid white;
+        outline: none;
+    }
+    button.navbar-toggler{
+        background-color:white;
+        outline: none;
+        margin-right: 20px;
+    }
+    .navbar-collapse{
+        z-index: 999;
+        background-color: white;
+        border-radius: 5px;
+        border: solid 2px #009900;
+        padding-left: 5px;
+    }   
+    #logo{
+        margin-top: 20px;
     }
   }
