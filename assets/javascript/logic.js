@@ -70,12 +70,20 @@ $("#btn-search").on("click", function(event) {
 function onlyOnePetPic(event){
 	var clickedPet = $(event.target).attr("id");
 	var descDiv = $("."+clickedPet);
+	var iconId = clickedPet.substring(3);
 
 	if(clickedPet === selectedPet){
 		descDiv.css("display","none");
 		$("#"+clickedPet).css("background-color","#dddddd");
 		$("#"+clickedPet).css("width","150px");
 		$("#"+clickedPet).css("height","150px");
+		
+		var iconHolder = $($("#"+iconId).children()[0]);
+		var tempClass = iconHolder.attr("class");
+		iconHolder.removeClass(tempClass);
+		iconHolder.addClass("fa fa-ellipsis-v");
+		iconHolder.css("color","#dddddd");
+
 		selectedPet = "";
 		return;
 	}
@@ -84,6 +92,13 @@ function onlyOnePetPic(event){
 		$("#"+clickedPet).css("background-color","#009900");
 		$("#"+clickedPet).css("width","200px");
 		$("#"+clickedPet).css("height","200px");
+
+		var iconHolder = $($("#"+iconId).children()[0]);
+		var tempClass = iconHolder.attr("class");
+		iconHolder.removeClass(tempClass);
+		iconHolder.addClass("fa fa-ellipsis-h");
+		iconHolder.css("color","#009900");
+
 		if(selectedPet!=="")
 			$("#"+selectedPet).click();
 		selectedPet = clickedPet;
@@ -161,6 +176,7 @@ function genericApiCall(){
 				}
 				$("#shelterResults").html("");
 				currentActive = "li0";
+
 				$.each(response.petfinder.shelters.shelter, function(i){
 					var _latitude = response.petfinder.shelters.shelter[i].latitude.$t;
 					var _longitude = response.petfinder.shelters.shelter[i].longitude.$t;
@@ -255,9 +271,11 @@ function genericApiCall(){
 					var tempH = "200px;";
 					var tempW = "200px;";
 					var alignment = "v";
+					var tempIconColor = "#dddddd";
 					if(i===0) {
 						selectedPet="pic"+tempId;
 						alignment = "h";
+						tempIconColor = "#009900"
 					}
 					if (i !== 0) {
 						tempH = "150px;";
@@ -272,31 +290,30 @@ function genericApiCall(){
 					
 					
 					$(".body").append(
-														"<div id='"+ tempId +"'>" +
-														//"<i class='fa fa-ellipsis-"+ alignment +"'></i>"+
-														"<img " +
-																"onclick = 'onlyOnePetPic(event)'" + 
-																"id='pic" + tempId + "'" +
-																"style = " + tempBg+
-																"width: "+ tempW +
-																"height: "+ tempH +
-																"border-radius:50%;"+
-																"display:block;"+
-																"padding:2px;"+
-																"margin: auto;"+
-																"margin-top: 20px;' "+
-																"src='" + tempPhoto +
-														"'><br><h4 class='center'><b>"+ _name +"</b></h4><br>" +
-														
-														//"<hr>"+
-														"<div " + tempZero + " class='pic"+ tempId +"'>" +
-														"<b>Age: </b>"+ _age +"<br>" +
-														"<b>Animal: </b>"+ _animal +"<br>" +
-														"<b>Gender: </b>"+ _sex +"<br>" +
-														"<b>Size: </b>"+ _size +"<br>" +
-														"<u><b>Description:</b></u><br>" + desc +
-														"</div></div><hr>"
-														
+						"<div id='"+ tempId +"'>" +
+						"<i onclick='iconClick(event)' style='width:40px; font-size:2rem; color: "+ tempIconColor +"' id='"+ tempId +"' name='pic"+ tempId +"'class='fa fa-ellipsis-"+ alignment +"'></i>"+
+						"<img " +
+							"onclick = 'onlyOnePetPic(event)'" + 
+							"id='pic" + tempId + "'" +
+							"style = " + tempBg+
+							"width: "+ tempW +
+							"height: "+ tempH +
+							"border-radius:50%;"+
+							"display:block;"+
+							"padding:2px;"+
+							"margin: auto;"+
+							"margin-top: 20px;' "+
+							"src='" + tempPhoto +
+						"'><br><h4 class='center'><b>"+ _name +"</b></h4><br>" +
+						
+						//"<hr>"+
+						"<div " + tempZero + " class='pic"+ tempId +"'>" +
+						"<b>Age: </b>"+ _age +"<br>" +
+						"<b>Animal: </b>"+ _animal +"<br>" +
+						"<b>Gender: </b>"+ _sex +"<br>" +
+						"<b>Size: </b>"+ _size +"<br>" +
+						"<u><b>Description:</b></u><br>" + desc +
+						"</div></div><hr>"				
 					);
 				}
 			});
@@ -337,6 +354,11 @@ function onlyOneOpen(e){
 		return;
 	}
 };
+
+function iconClick(event){
+	// Finds image in the div and clicks it
+	$("img#" + $(event.target).attr("name")).click();
+}
 
 // document ready function
 $(document).ready(function(){
