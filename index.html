@@ -26,6 +26,18 @@
 
 <body>
         <style>
+
+            @media (max-width: 700px){
+                #setMargin{
+                    margin-left: 0px!important;
+                }
+            }
+            @media (min-width: 701px){
+                #setMargin{
+                    margin-left: 0px;
+                }
+            }
+            
             #ad-card{
                 margin-top: 70px;
             }
@@ -159,7 +171,8 @@
         </div>
     </div>
     <br><br>
-    <div class="row">
+    
+    <div class="row" id="setMargin"> 
             <div class="col s12">
         <div class="input-field" id="fixIt">
             <input placeholder="Enter Zip Code" id="zip_code" type="number" class="validate">

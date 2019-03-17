@@ -5,6 +5,11 @@ input[type=number]::-webkit-outer-spin-button {
   margin: 0; 
 }
 
+html, body{
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
 .nav-wrapper {
     background-color: #009900;
     color: rgba(143, 20, 20, 0.986);
@@ -46,6 +51,7 @@ width:400px; height:174px;
     max-height: 85%;
     bottom: 0;
     overflow: scroll;
+    overflow-x: hidden;
   }
   
   /* Page content. The value of the margin-left property should match the value of the sidebar's width property */
