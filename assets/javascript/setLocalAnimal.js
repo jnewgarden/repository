@@ -72,13 +72,14 @@ if(dynamicContent==="Eminem"){
     $("#motto").text("Mom's spaghetti");
     //return;
 }
-else if(dynamicContent==="Pewdiepie"){
-    $("#motto").text("Bitch lasagna");
-    //return;
-}
-else if(dynamicContent==="Nadia"){
-    $("#motto").text("Sistuh");
-    //return;
+else if(dynamicContent!=="Dog" &&
+        dynamicContent!=="Cat" &&
+        dynamicContent!=="Barnyard" &&
+        dynamicContent!=="Bird" &&
+        dynamicContent!=="Reptile" &&
+        dynamicContent!=="Horse" &&
+        dynamicContent!=="Smallfurry"){
+    console.log("We're sorry, that animal does not exist in our search database.");
 }
 else {
     animal = "&animal=" +  dynamicContent.toLowerCase();
