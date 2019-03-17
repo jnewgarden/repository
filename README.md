@@ -22,9 +22,9 @@ Our Mission is to help you find where to rescue animal companion of your dreams.
 
 we use pet finder api and google maps to offer curated search results depending on user location or animal choices. 
 
-    We thank you for chosing this application. Your suggestions and input are welcome to make the application even better.
-     
-    Animals in shelters need us, but the most importantly, we need them to make our lives better and meaningful. 
+##### We thank you for chosing this application. Your suggestions and input are welcome to make the application even better.
+
+####### Animals in shelters need us, but the most importantly, we need them to make our lives better and meaningful. 
 
 
 ### CHEERS TO MAKING ADOPTION BETTER AND EASIER!!!! 
