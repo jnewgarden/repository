@@ -47,7 +47,9 @@ $("#zip_code").on("keyup", function(event) {
 		zipCode = tempZip;
 		$("#ad-card").empty();
 		$(this).val("");
+		
 		genericApiCall();
+		$("#setMargin").css("margin-left","250px");//ADD ME TO CODE
   }
 });
 
@@ -62,7 +64,9 @@ $("#btn-search").on("click", function(event) {
 		zipCode = tempZip;
 		$("#ad-card").empty();
 		$("#zip_code").val("");
+		
 		genericApiCall();
+		$("#setMargin").css("margin-left","250px");//ADD ME TO CODE
 	}
 });
 
@@ -121,7 +125,7 @@ function moreBtn(event){
 	$("#shelterDetails").append(
 
 		"<div class='row' style='margin-bottom: 0;'>" +
-			"<ul style='margin: 0;'>" +
+			"<ul style='margin: 0; width: 100%'>" +
 				"<li >" +
 					"<div class='collapsible-header' style='background-color: #009900; color: white;'>More Details</div>"+
 					"<div style='height:200px;'>" +
