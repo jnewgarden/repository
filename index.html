@@ -22,6 +22,9 @@
 
 <body>
         <style>
+            #ad-card{
+                margin-top: 70px;
+            }
             .collapsible.style{
                 max-width: 280px;
                 min-width: 280px;
@@ -48,9 +51,7 @@
                 color: white!important;
 
             }
-            a.nav-link{
-                border-bottom: 2px solid #009900;
-            }
+            
             @media (min-width: 992px){
                 a.nav-link{
                     color:white!important;
@@ -77,6 +78,7 @@
                 button.navbar-toggler{
                     background-color:white;
                     outline: none;
+                    margin-right: 20px;
                 }
                 .navbar-collapse{
                     z-index: 999;
@@ -91,7 +93,7 @@
             }
             
             </style>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
             <a class="navbar-brand" href="index.html">PetAwesome</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
@@ -100,14 +102,17 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
               <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="index.html">| Home</a>
+                    <a class="nav-link active" href="index.html">| Home</a>
                 </li>
+                <div class="dropdown-divider"></div>
                 <li class="nav-item" id="dogActive">
                   <a class="nav-link" href="animal.html?animal=Dog">| Dog</a>
                 </li>
+                <div class="dropdown-divider"></div>
                 <li class="nav-item" id="catActive">
                   <a class="nav-link" href="animal.html?animal=Cat">| Cat</a>
                 </li>
+                <div class="dropdown-divider"></div>
                 <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     | Other
