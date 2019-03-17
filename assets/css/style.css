@@ -42,21 +42,15 @@ width:400px; height:174px;
     margin: 0;
     padding: 0;
     width: 250px;
-    /*background-color: #f1f1f1; */
     top: 65px;
-    text-overflow: ellipsis;
-    overflow: hidden;
     position: fixed;
-    min-height: 85%;
-    max-height: 85%;
-    bottom: 0;
-    overflow: scroll;
-    overflow-x: hidden;
+    height: 100%;
+    overflow: auto;
   }
   
   /* Page content. The value of the margin-left property should match the value of the sidebar's width property */
   div.content {
-    margin-left: 250px;
+    margin-left: 260px;
     padding: 1px 16px;
     height: 100%;
   }
@@ -67,6 +61,7 @@ width:400px; height:174px;
       width: 100%;
       height: auto;
       position: relative;
+      margin-bottom: 70px;
     }
     .sidebar a {float: left;}
     div.content {margin-left: 0;}
@@ -95,3 +90,96 @@ width:400px; height:174px;
       float: none;
     }
   }
+
+
+  /* styling the nav bar */
+
+  @media (max-width: 700px){
+    #setMargin{
+        margin-left: 0px!important;
+    }
+}
+@media (min-width: 701px){
+    #setMargin{
+        margin-left: 0px;
+    }
+}
+
+#ad-card{
+    margin-top: 70px;
+}
+.collapsible.style{
+    max-width: 280px;
+    min-width: 280px;
+}
+
+@media (max-width: 700px){
+    .rowCell{
+        max-width: 90%;
+        min-width:90%;
+        margin: auto;
+    }
+    .collapsible.style{
+        max-width: 100%;
+        min-width:100%;
+    }
+}
+.navbar{
+    background-color: #009900!important;
+
+}
+.navbar-brand{
+    padding: 0;
+    padding-left: 20px;
+    color: white!important;
+
+}
+
+@media (min-width: 992px){
+    a.nav-link{
+        color:white!important;
+    }
+    .navbar{
+        z-index: 999;
+    }
+    .navbar ul,a{
+        max-height: 64px;
+    }
+    .mr-auto{
+        margin-right: 0px!important;
+        margin-left: auto;
+    }
+    .dropdown-menu.show {
+        position: relative!important;
+    }
+    .nav-item.dropdown{
+        width: 150px;
+    }
+    .dropdown-menu{
+    top: 0!important;
+}
+
+}
+
+@media (max-width: 991px){
+    button.navbar-toggler:focus{
+        background-color:#009900;
+        border: 1px solid white;
+        outline: none;
+    }
+    button.navbar-toggler{
+        background-color:white;
+        outline: none;
+        margin-right: 20px;
+    }
+    .navbar-collapse{
+        z-index: 999;
+        background-color: white;
+        border-radius: 5px;
+        border: solid 2px #009900;
+        padding-left: 5px;
+    }   
+    #logo{
+        margin-top: 20px;
+    }
+}
